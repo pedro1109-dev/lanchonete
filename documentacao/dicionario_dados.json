@@ -1,0 +1,1065 @@
+[
+  {
+    "entidade": "Cliente",
+    "tabela": "core_cliente",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "contato",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Telefone ou e-mail para contato."
+      }
+    ]
+  },
+  {
+    "entidade": "Mesa",
+    "tabela": "core_mesa",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "numero",
+        "tipo": "SMALLINT",
+        "chave": "UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Número único da mesa no salão."
+      }
+    ]
+  },
+  {
+    "entidade": "Cargo",
+    "tabela": "core_cargo",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "codigo",
+        "tipo": "VARCHAR(20)",
+        "chave": "UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Função operacional. Valores: ATENDENTE, COZINHEIRO, ENTREGADOR, GERENTE."
+      }
+    ]
+  },
+  {
+    "entidade": "Funcionario",
+    "tabela": "core_funcionario",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "contato",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Contato do funcionário."
+      },
+      {
+        "coluna": "ativo",
+        "tipo": "BOOLEAN",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Disponível para novos atendimentos."
+      }
+    ]
+  },
+  {
+    "entidade": "ExercicioCargo",
+    "tabela": "core_exerciciocargo",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "funcionario_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Pessoa que exerce a função. Referência: core_funcionario.id (exclusão protegida)."
+      },
+      {
+        "coluna": "cargo_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Cargo exercido no intervalo. Referência: core_cargo.id (exclusão protegida)."
+      },
+      {
+        "coluna": "inicio",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Início inclusivo do período."
+      },
+      {
+        "coluna": "fim",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Não",
+        "descricao": "Fim exclusivo; vazio indica período aberto."
+      }
+    ]
+  },
+  {
+    "entidade": "Fornecedor",
+    "tabela": "core_fornecedor",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "contato",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Telefone ou e-mail comercial."
+      }
+    ]
+  },
+  {
+    "entidade": "Ingrediente",
+    "tabela": "core_ingrediente",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "unidade",
+        "tipo": "VARCHAR(3)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidade usada no saldo e nas receitas. Valores: kg, l, un."
+      },
+      {
+        "coluna": "estoque",
+        "tipo": "NUMERIC(12,3)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Saldo informado pelo responsável; consumo é estimado, sem baixa automática."
+      },
+      {
+        "coluna": "fornecedor_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Fornecedor responsável pelo abastecimento. Referência: core_fornecedor.id (exclusão protegida)."
+      }
+    ]
+  },
+  {
+    "entidade": "Categoria",
+    "tabela": "core_categoria",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      }
+    ]
+  },
+  {
+    "entidade": "Produto",
+    "tabela": "core_produto",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "categoria_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Categoria do cardápio. Referência: core_categoria.id (exclusão protegida)."
+      },
+      {
+        "coluna": "preco_base",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço individual ou promocional do combo."
+      },
+      {
+        "coluna": "combo",
+        "tipo": "BOOLEAN",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Se verdadeiro, composição vem de ComponenteCombo."
+      },
+      {
+        "coluna": "ativo",
+        "tipo": "BOOLEAN",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Disponível no cardápio; venda valida a composição."
+      }
+    ]
+  },
+  {
+    "entidade": "Receita",
+    "tabela": "core_receita",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto simples preparado. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "ingrediente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Insumo utilizado. Referência: core_ingrediente.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "NUMERIC(12,3)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Quantidade por unidade do produto, na unidade do insumo."
+      }
+    ]
+  },
+  {
+    "entidade": "ComponenteCombo",
+    "tabela": "core_componentecombo",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "combo_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Combo que reúne os produtos. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto simples componente. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "SMALLINT",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidades do produto em um combo."
+      }
+    ]
+  },
+  {
+    "entidade": "Variacao",
+    "tabela": "core_variacao",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto ou combo que aceita esta opção. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "grupo",
+        "tipo": "VARCHAR(60)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Ex.: tamanho ou ponto. Escolhe-se no máximo uma opção por grupo."
+      },
+      {
+        "coluna": "acrescimo",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Acréscimo por unidade vendida."
+      }
+    ]
+  },
+  {
+    "entidade": "Adicional",
+    "tabela": "core_adicional",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "preco",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço por unidade adicional."
+      }
+    ]
+  },
+  {
+    "entidade": "ProdutoAdicional",
+    "tabela": "core_produtoadicional",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto ou combo compatível. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "adicional_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Adicional permitido. Referência: core_adicional.id (exclusão protegida)."
+      }
+    ]
+  },
+  {
+    "entidade": "ReceitaAdicional",
+    "tabela": "core_receitaadicional",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "adicional_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Adicional preparado. Referência: core_adicional.id (exclusão protegida)."
+      },
+      {
+        "coluna": "ingrediente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Ingrediente do adicional. Referência: core_ingrediente.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "NUMERIC(12,3)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Quantidade por unidade adicional."
+      }
+    ]
+  },
+  {
+    "entidade": "Promocao",
+    "tabela": "core_promocao",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      },
+      {
+        "coluna": "inicio",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Início inclusivo da promoção."
+      },
+      {
+        "coluna": "fim",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Fim exclusivo da promoção."
+      }
+    ]
+  },
+  {
+    "entidade": "PromocaoProduto",
+    "tabela": "core_promocaoproduto",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "promocao_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Campanha promocional. Referência: core_promocao.id (exclusão protegida)."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto ou combo promocionado. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "preco",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço temporário. Entre campanhas simultâneas usa-se o menor preço."
+      }
+    ]
+  },
+  {
+    "entidade": "Cupom",
+    "tabela": "core_cupom",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "codigo",
+        "tipo": "VARCHAR(30)",
+        "chave": "UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Código único; comparação exata."
+      },
+      {
+        "coluna": "tipo",
+        "tipo": "VARCHAR(10)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidade do desconto. Valores: VALOR, PERCENTUAL."
+      },
+      {
+        "coluna": "valor",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor em reais ou percentual de 0 a 100."
+      },
+      {
+        "coluna": "inicio",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Início inclusivo da validade."
+      },
+      {
+        "coluna": "fim",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Fim exclusivo da validade."
+      }
+    ]
+  },
+  {
+    "entidade": "Pedido",
+    "tabela": "core_pedido",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "cliente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Cliente; obrigatório no aplicativo, delivery e uso de cupom. Referência: core_cliente.id (exclusão protegida)."
+      },
+      {
+        "coluna": "atendente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Atendente responsável pelo recebimento. Referência: core_funcionario.id (exclusão protegida)."
+      },
+      {
+        "coluna": "mesa_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Mesa obrigatória somente para consumo local. Referência: core_mesa.id (exclusão protegida)."
+      },
+      {
+        "coluna": "canal",
+        "tipo": "VARCHAR(10)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Origem do pedido. Valores: BALCAO, TELEFONE, APP."
+      },
+      {
+        "coluna": "modalidade",
+        "tipo": "VARCHAR(10)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Forma de atendimento. Valores: LOCAL, RETIRADA, DELIVERY."
+      },
+      {
+        "coluna": "criado_em",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Instante em que a venda foi registrada."
+      },
+      {
+        "coluna": "desconto",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Desconto monetário efetivamente concedido sobre os itens."
+      }
+    ]
+  },
+  {
+    "entidade": "ItemPedido",
+    "tabela": "core_itempedido",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido ao qual o item pertence. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "produto_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Produto ou combo vendido. Referência: core_produto.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "SMALLINT",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidades vendidas."
+      },
+      {
+        "coluna": "preco_base",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço base da venda, já considerando promoção; snapshot."
+      },
+      {
+        "coluna": "promocao_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Não",
+        "descricao": "Promoção aplicada na venda. Referência: core_promocao.id (exclusão protegida)."
+      },
+      {
+        "coluna": "observacao",
+        "tipo": "VARCHAR(300)",
+        "chave": "",
+        "obrigatorio": "Não",
+        "descricao": "Instrução de preparo, ex.: sem cebola."
+      }
+    ]
+  },
+  {
+    "entidade": "ItemVariacao",
+    "tabela": "core_itemvariacao",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "item_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Item personalizado. Referência: core_itempedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "variacao_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Opção selecionada. Referência: core_variacao.id (exclusão protegida)."
+      },
+      {
+        "coluna": "acrescimo",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Acréscimo congelado no instante da venda."
+      }
+    ]
+  },
+  {
+    "entidade": "ItemAdicional",
+    "tabela": "core_itemadicional",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "item_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Item com adicional. Referência: core_itempedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "adicional_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Adicional selecionado. Referência: core_adicional.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "SMALLINT",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Unidades adicionais para cada unidade do item."
+      },
+      {
+        "coluna": "preco",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Preço unitário do adicional na venda; snapshot."
+      }
+    ]
+  },
+  {
+    "entidade": "ConsumoItem",
+    "tabela": "core_consumoitem",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "item_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Item vendido. Referência: core_itempedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "ingrediente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Ingrediente estimado. Referência: core_ingrediente.id (exclusão protegida)."
+      },
+      {
+        "coluna": "quantidade",
+        "tipo": "NUMERIC(12,3)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Consumo total deste item, incluindo quantidade vendida, combo e adicionais; snapshot."
+      }
+    ]
+  },
+  {
+    "entidade": "FormaPagamento",
+    "tabela": "core_formapagamento",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "nome",
+        "tipo": "VARCHAR(120)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nome para identificação e exibição."
+      }
+    ]
+  },
+  {
+    "entidade": "Pagamento",
+    "tabela": "core_pagamento",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido pago. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "forma_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Forma de pagamento utilizada. Referência: core_formapagamento.id (exclusão protegida)."
+      },
+      {
+        "coluna": "valor",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Valor efetivamente recebido nesta forma; sem troco."
+      }
+    ]
+  },
+  {
+    "entidade": "HistoricoStatus",
+    "tabela": "core_historicostatus",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido que mudou de etapa. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "status",
+        "tipo": "VARCHAR(15)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Etapa registrada nesta transição. Valores: RECEBIDO, EM_PREPARO, PRONTO, SAIU_ENTREGA, CONCLUIDO, CANCELADO."
+      },
+      {
+        "coluna": "ocorrido_em",
+        "tipo": "TIMESTAMPTZ",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Instante da transição."
+      }
+    ]
+  },
+  {
+    "entidade": "UsoCupom",
+    "tabela": "core_usocupom",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK / UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido beneficiado; no máximo um cupom. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "cupom_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Cupom usado. Referência: core_cupom.id (exclusão protegida)."
+      },
+      {
+        "coluna": "cliente_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Cliente que resgatou o cupom. Referência: core_cliente.id (exclusão protegida)."
+      }
+    ]
+  },
+  {
+    "entidade": "Entrega",
+    "tabela": "core_entrega",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK / UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido de delivery; uma única entrega. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "entregador_id",
+        "tipo": "BIGINT",
+        "chave": "FK",
+        "obrigatorio": "Sim",
+        "descricao": "Funcionário com cargo de entregador na venda. Referência: core_funcionario.id (exclusão protegida)."
+      },
+      {
+        "coluna": "logradouro",
+        "tipo": "VARCHAR(150)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Rua/avenida no momento do pedido."
+      },
+      {
+        "coluna": "numero",
+        "tipo": "VARCHAR(15)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Número do imóvel, ou s/n."
+      },
+      {
+        "coluna": "complemento",
+        "tipo": "VARCHAR(100)",
+        "chave": "",
+        "obrigatorio": "Não",
+        "descricao": "Apartamento ou referência opcional."
+      },
+      {
+        "coluna": "bairro",
+        "tipo": "VARCHAR(80)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Bairro de entrega."
+      },
+      {
+        "coluna": "cidade",
+        "tipo": "VARCHAR(80)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Município de entrega."
+      },
+      {
+        "coluna": "cep",
+        "tipo": "VARCHAR(9)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "CEP do destino."
+      },
+      {
+        "coluna": "distancia_km",
+        "tipo": "NUMERIC(6,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Distância informada pelo atendente."
+      },
+      {
+        "coluna": "taxa",
+        "tipo": "NUMERIC(10,2)",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Taxa calculada pela política vigente e congelada na venda."
+      }
+    ]
+  },
+  {
+    "entidade": "Avaliacao",
+    "tabela": "core_avaliacao",
+    "atributos": [
+      {
+        "coluna": "id",
+        "tipo": "BIGINT identity",
+        "chave": "PK",
+        "obrigatorio": "Gerado",
+        "descricao": "Identificador único gerado pelo banco."
+      },
+      {
+        "coluna": "pedido_id",
+        "tipo": "BIGINT",
+        "chave": "FK / UQ",
+        "obrigatorio": "Sim",
+        "descricao": "Pedido concluído avaliado. Referência: core_pedido.id (exclusão protegida)."
+      },
+      {
+        "coluna": "nota",
+        "tipo": "SMALLINT",
+        "chave": "",
+        "obrigatorio": "Sim",
+        "descricao": "Nota de 1 a 5."
+      },
+      {
+        "coluna": "comentario",
+        "tipo": "VARCHAR(500)",
+        "chave": "",
+        "obrigatorio": "Não",
+        "descricao": "Comentário opcional do cliente."
+      }
+    ]
+  }
+]

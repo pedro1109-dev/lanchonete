@@ -1,0 +1,2 @@
+PASSOU: login; cadastro de cliente; pedido com combo, adicional e cupom; pagamento; status; relatório com consumo; responsividade 390 px; zero erros JavaScript.
+Ambiente: Chromium headless, Django runserver, SQLite.

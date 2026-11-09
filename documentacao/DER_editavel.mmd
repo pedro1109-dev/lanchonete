@@ -1,0 +1,222 @@
+erDiagram
+  Cliente {
+    bigint id PK
+    string nome
+    string contato
+  }
+  Mesa {
+    bigint id PK
+    string numero UK
+  }
+  Cargo {
+    bigint id PK
+    string nome
+    string codigo UK
+  }
+  Funcionario {
+    bigint id PK
+    string nome
+    string contato
+    string ativo
+  }
+  ExercicioCargo {
+    bigint id PK
+    bigint funcionario_id FK
+    bigint cargo_id FK
+    string inicio
+    string fim
+  }
+  Funcionario ||--o{ ExercicioCargo : "funcionario"
+  Cargo ||--o{ ExercicioCargo : "cargo"
+  Fornecedor {
+    bigint id PK
+    string nome
+    string contato
+  }
+  Ingrediente {
+    bigint id PK
+    string nome
+    string unidade
+    decimal estoque
+    bigint fornecedor_id FK
+  }
+  Fornecedor ||--o{ Ingrediente : "fornecedor"
+  Categoria {
+    bigint id PK
+    string nome
+  }
+  Produto {
+    bigint id PK
+    string nome
+    bigint categoria_id FK
+    decimal preco_base
+    string combo
+    string ativo
+  }
+  Categoria ||--o{ Produto : "categoria"
+  Receita {
+    bigint id PK
+    bigint produto_id FK
+    bigint ingrediente_id FK
+    decimal quantidade
+  }
+  Produto ||--o{ Receita : "produto"
+  Ingrediente ||--o{ Receita : "ingrediente"
+  ComponenteCombo {
+    bigint id PK
+    bigint combo_id FK
+    bigint produto_id FK
+    string quantidade
+  }
+  Produto ||--o{ ComponenteCombo : "combo"
+  Produto ||--o{ ComponenteCombo : "produto"
+  Variacao {
+    bigint id PK
+    string nome
+    bigint produto_id FK
+    string grupo
+    decimal acrescimo
+  }
+  Produto ||--o{ Variacao : "produto"
+  Adicional {
+    bigint id PK
+    string nome
+    decimal preco
+  }
+  ProdutoAdicional {
+    bigint id PK
+    bigint produto_id FK
+    bigint adicional_id FK
+  }
+  Produto ||--o{ ProdutoAdicional : "produto"
+  Adicional ||--o{ ProdutoAdicional : "adicional"
+  ReceitaAdicional {
+    bigint id PK
+    bigint adicional_id FK
+    bigint ingrediente_id FK
+    decimal quantidade
+  }
+  Adicional ||--o{ ReceitaAdicional : "adicional"
+  Ingrediente ||--o{ ReceitaAdicional : "ingrediente"
+  Promocao {
+    bigint id PK
+    string nome
+    string inicio
+    string fim
+  }
+  PromocaoProduto {
+    bigint id PK
+    bigint promocao_id FK
+    bigint produto_id FK
+    decimal preco
+  }
+  Promocao ||--o{ PromocaoProduto : "promocao"
+  Produto ||--o{ PromocaoProduto : "produto"
+  Cupom {
+    bigint id PK
+    string codigo UK
+    string tipo
+    decimal valor
+    string inicio
+    string fim
+  }
+  Pedido {
+    bigint id PK
+    bigint cliente_id FK
+    bigint atendente_id FK
+    bigint mesa_id FK
+    string canal
+    string modalidade
+    string criado_em
+    decimal desconto
+  }
+  Cliente o|--o{ Pedido : "cliente"
+  Funcionario ||--o{ Pedido : "atendente"
+  Mesa o|--o{ Pedido : "mesa"
+  ItemPedido {
+    bigint id PK
+    bigint pedido_id FK
+    bigint produto_id FK
+    string quantidade
+    decimal preco_base
+    bigint promocao_id FK
+    string observacao
+  }
+  Pedido ||--o{ ItemPedido : "pedido"
+  Produto ||--o{ ItemPedido : "produto"
+  Promocao o|--o{ ItemPedido : "promocao"
+  ItemVariacao {
+    bigint id PK
+    bigint item_id FK
+    bigint variacao_id FK
+    decimal acrescimo
+  }
+  ItemPedido ||--o{ ItemVariacao : "item"
+  Variacao ||--o{ ItemVariacao : "variacao"
+  ItemAdicional {
+    bigint id PK
+    bigint item_id FK
+    bigint adicional_id FK
+    string quantidade
+    decimal preco
+  }
+  ItemPedido ||--o{ ItemAdicional : "item"
+  Adicional ||--o{ ItemAdicional : "adicional"
+  ConsumoItem {
+    bigint id PK
+    bigint item_id FK
+    bigint ingrediente_id FK
+    decimal quantidade
+  }
+  ItemPedido ||--o{ ConsumoItem : "item"
+  Ingrediente ||--o{ ConsumoItem : "ingrediente"
+  FormaPagamento {
+    bigint id PK
+    string nome
+  }
+  Pagamento {
+    bigint id PK
+    bigint pedido_id FK
+    bigint forma_id FK
+    decimal valor
+  }
+  Pedido ||--o{ Pagamento : "pedido"
+  FormaPagamento ||--o{ Pagamento : "forma"
+  HistoricoStatus {
+    bigint id PK
+    bigint pedido_id FK
+    string status
+    string ocorrido_em
+  }
+  Pedido ||--o{ HistoricoStatus : "pedido"
+  UsoCupom {
+    bigint id PK
+    bigint pedido_id FK
+    bigint cupom_id FK
+    bigint cliente_id FK
+  }
+  Pedido ||--o| UsoCupom : "pedido"
+  Cupom ||--o{ UsoCupom : "cupom"
+  Cliente ||--o{ UsoCupom : "cliente"
+  Entrega {
+    bigint id PK
+    bigint pedido_id FK
+    bigint entregador_id FK
+    string logradouro
+    string numero
+    string complemento
+    string bairro
+    string cidade
+    string cep
+    decimal distancia_km
+    decimal taxa
+  }
+  Pedido ||--o| Entrega : "pedido"
+  Funcionario ||--o{ Entrega : "entregador"
+  Avaliacao {
+    bigint id PK
+    bigint pedido_id FK
+    string nota
+    string comentario
+  }
+  Pedido ||--o| Avaliacao : "pedido"
